@@ -1,4 +1,35 @@
 
+.img-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* Center horizontally */
+  gap: 12px;
+  margin: 20px 0;
+  background-color: white;
+}
+
+.league-img-container {
+  background-color: #222;
+  padding: 10px;
+  display: inline-block;
+  border-radius: 6px;
+}
+
+.league-img-container img{
+  height: 1em; /* Match text height */
+  width: auto;
+  display: block;
+}
+
+.league-title {
+  font-size: 1.5em;
+  margin: 0;
+  color: black; /* Optional: for visibility against dark backgrounds */
+  font-weight: normal;
+}
+
+
+
 .title_bar{
     display: flex; 
     align-items: center; 
@@ -24,8 +55,15 @@
   /* To center on screen */
   margin: 20px auto;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  overflow-y: scroll;
 }
 
+/* If you want to keep the margin but still no page scrolling */
+body, html {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* disable overall page scroll */
+}
 
 @media print {
   .a4-paper {

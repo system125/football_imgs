@@ -9,20 +9,28 @@
     </style>
 </head>
 <body>
-    <header>
+    {# <header>
     <div class="title_bar no-print">
             <p class="title_text">Today's game loader!</p>
         {% if interactive %}
     <button onclick="window.print()" class="no-print">Print</button>
     {% endif %}
-    </div>
+    </div> #}
+{# 
+    </header> #}
 
-    </header>
+    {% include 'header.jinja2' %}
+    
     
   <div class="a4-paper">
+    {% include 'header.jinja2'%}
     {# <h1 style="color:red; font-style:italic;">{{ header }}</h1> #}
-    <h1 class="title">{{ header }}</h1>
-    <p>This is your printable A4 content.</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Under_construction_icon-yellow.svg/1200px-Under_construction_icon-yellow.svg.png" 
+     alt="Under Construction" 
+     style="width:200px; height:auto;" />
+
+
+    <p>League rosters .. In construction</p>
 
   </div>
 </body>
