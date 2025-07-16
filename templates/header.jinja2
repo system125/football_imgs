@@ -1,15 +1,16 @@
-
-{# <header>
-<div style="background-color: #222; padding: 10px; display: inline-block;">
-  <img src="{{ league_img }}" alt="Image" style="display: block; max-width: 100%;">
-</div>
-    <h1>{{ title }}</h1>
-</header> #}
-
+{#
+    Header for the app
+#}
+{%macro render_header(league_img,title,show_button=false)%}
 <div class="img-title-row">
     <div class="league-img-container">
         <img src="{{ league_img }}" alt="Image"/>
     </div>
 
     <h1 class="league-title"> {{ title }} </h1>
+    
+    {% if show_button | default(false) %}
+    <button   class="no-print" onclick="window.print()"> Print</button>
+    {% endif %}
 </div>
+{% endmacro %}

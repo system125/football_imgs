@@ -1,0 +1,9 @@
+
+<div class="team-container">
+    {% for team in teams %}
+        <div class="team-card">
+            <img src="{{team.logo_url}}"/>
+            <p>{{team.short_name }}</p>
+        </div>
+    {% endfor %}
+</div>

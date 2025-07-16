@@ -19,18 +19,17 @@
 {# 
     </header> #}
 
-    {% include 'header.jinja2' %}
-    
+    {% import 'header.jinja2' as header %}
+
+{{ header.render_header(league_img, title , true) }}
     
   <div class="a4-paper">
+
     {% include 'header.jinja2'%}
     {# <h1 style="color:red; font-style:italic;">{{ header }}</h1> #}
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Under_construction_icon-yellow.svg/1200px-Under_construction_icon-yellow.svg.png" 
-     alt="Under Construction" 
-     style="width:200px; height:auto;" />
 
-
-    <p>League rosters .. In construction</p>
+    {% include 'teams.jinja2' %}
+ 
 
   </div>
 </body>

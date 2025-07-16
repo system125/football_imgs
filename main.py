@@ -16,19 +16,22 @@ print(f"{css}")
 
 id = 47
 league_data = api.get_league_info(id = id )
-
+teams = api.get_teams_for_league(id = id)
 template = env.get_template("index.jinja2")
+
 html = template.render(
     title=league_data.name, #type: ignore
     header="Welcome to A4 Page",
     custom_css=css,
-    league_img=league_data.logo_url #type: ignore
+    league_img=league_data.logo_url, #type: ignore
+    teams = teams #type: ignore
+
 )
 
 print(html)
-# with open("test.html",'w') as f:
-#     f.writelines(html)
-#     f.close()
+with open("test.html",'w') as f:
+    f.writelines(html)
+    f.close()
 
 webview.create_window("Preview",html=html)
 webview.start()

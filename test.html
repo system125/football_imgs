@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Premier League</title>
+  
+    <style>
+    
+.img-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* Center horizontally */
+  gap: 12px;
+  margin: 20px 0;
+  background-color: white;
+}
+
+.league-img-container {
+  /* background-color: #222; */
+  padding: 10px;
+  display: inline-block;
+  border-radius: 6px;
+}
+
+.league-img-container img{
+  height: 2em; /* Match text height */
+  width: auto;
+  display: block;
+  filter: invert(1);
+}
+
+.league-title {
+  font-size: 1.5em;
+  margin: 0;
+  color: black; /* Optional: for visibility against dark backgrounds */
+  font-weight: normal;
+}
+
+.team-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* grid-template-columns: repeat(autofill,minmax(120px,1fr)); */
+    gap: 16px;
+    justify-items: center;
+    align-items: center;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.team-card {
+  text-align: center;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  padding: 10px;
+
+}
+
+.team-card img {
+  max-width: 80px;
+  height: auto;
+  display: block;
+  margin: 0 auto 8px auto;
+  /* filter: invert(1); */
+}
+
+.team-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.title_bar{
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+}
+
+.title{
+    margin: 0; 
+    text-align: center; 
+    flex-grow: 1;
+}
+
+.a4-paper {
+  width: 200mm;      /* slightly less than A4 width (210mm) */
+  /* height: 287mm;     slightly less than A4 height (297mm) */
+  box-sizing: border-box;
+
+  /* Optional styling */
+  border: 1px solid #000;  /* visible border for debugging */
+  padding: 20mm;           /* margin inside the page */
+  background: white;
+
+  /* To center on screen */
+  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* If you want to keep the margin but still no page scrolling */
+body, html {
+  height: 100%;
+  margin: 0;
+  overflow: scroll; /* disable overall page scroll */
+}
+
+@media print {
+  .a4-paper {
+    margin: 0;
+    box-shadow: none;
+    page-break-after: always;
+    border: none;
+    overflow: hidden;
+
+  }
+
+  body, html{
+    overflow: hidden;
+  }
+
+  .no-print{
+    display: none !important;
+  }
+}
+    </style>
+</head>
+<body>
+    
+
+
+    
+
+
+<div class="img-title-row">
+    <div class="league-img-container">
+        <img src="https://images.fotmob.com/image_resources/logo/leaguelogo/dark/47.png" alt="Image"/>
+    </div>
+
+    <h1 class="league-title"> Premier League </h1>
+    
+    
+    <button   class="no-print" onclick="window.print()"> Print</button>
+    
+</div>
+
+    
+  <div class="a4-paper">
+
+    
+
+    
+
+    
+<div class="team-container">
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/8678_large.png"/>
+            <p>Bournemouth</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/9825_large.png"/>
+            <p>Arsenal</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/10252_large.png"/>
+            <p>Aston Villa</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/9937_large.png"/>
+            <p>Brentford</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/10204_large.png"/>
+            <p>Brighton</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/8191_large.png"/>
+            <p>Burnley</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/8455_large.png"/>
+            <p>Chelsea</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/9826_large.png"/>
+            <p>Crystal Palace</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/8668_large.png"/>
+            <p>Everton</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/9879_large.png"/>
+            <p>Fulham</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/8463_large.png"/>
+            <p>Leeds</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/8650_large.png"/>
+            <p>Liverpool</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/8456_large.png"/>
+            <p>Man City</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/10260_large.png"/>
+            <p>Man United</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/10261_large.png"/>
+            <p>Newcastle</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/10203_large.png"/>
+            <p>Nottm Forest</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/8472_large.png"/>
+            <p>Sunderland</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/8586_large.png"/>
+            <p>Tottenham</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/8654_large.png"/>
+            <p>West Ham</p>
+        </div>
+    
+        <div class="team-card">
+            <img src="https://images.fotmob.com/image_resources/logo/teamlogo/8602_large.png"/>
+            <p>Wolves</p>
+        </div>
+    
+</div>
+ 
+
+  </div>
+</body>
+</html>
