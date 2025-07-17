@@ -4,9 +4,9 @@ import webview
 from jinja2 import Environment, FileSystemLoader
 import os 
 import api 
-
+import get_svg
 env = Environment(loader=FileSystemLoader('templates'))
-
+import model
 
 with open("styles/styles.css") as f:
     css = f.read()
@@ -19,6 +19,7 @@ league_data = api.get_league_info(id = id )
 teams = api.get_teams_for_league(id = id)
 template = env.get_template("index.jinja2")
 
+teams = get_svg.map_team_outlines(teams,league_data.name)
 html = template.render(
     title=league_data.name, #type: ignore
     header="Welcome to A4 Page",

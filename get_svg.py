@@ -1,3 +1,4 @@
+from typing import List
 import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -11,15 +12,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 import time 
-from svgpathtools import Path
-import xml.etree.ElementTree as ET
-from svgoutline import svg_to_outlines
+import model
 from bs4 import BeautifulSoup
-from svgpathtools import svg2paths
-from io import StringIO
-import math
-import re
 import svg_tools
+import cache_request
 
 def sleep_after_call(sleep_time:float=1.0):
     def sleepy_call_decor(func,sleep_time:float=1.0):
@@ -39,6 +35,7 @@ def sleep_after_call(sleep_time:float=1.0):
             return res
         return wrapper
     return sleepy_call_decor
+
 
 @sleep_after_call()
 def get_team_svg(team:str)->str | None:
@@ -66,28 +63,76 @@ def get_team_svg(team:str)->str | None:
 
     return src
 
-def load_svg(src:str)->str | None:
-    response = requests.get(src).text
 
-    soup = BeautifulSoup(response,"html.parser") #type: ignore
+def load_svg(team:model.Teams,league:str)->str | None:
 
-    return str(soup.find("svg"))
+
+    # soup = BeautifulSoup(response,"html.parser") #type: ignore
+
+    # svg =  str(soup.find("svg"))
+    # svg = svg_tools._ensure_svg_dimensions(svg_content=svg,width=210,height=210)
+    
+    direc = os.path.join("assets",league,"orig")
+    os.makedirs(direc,exist_ok=True)
+    file_name = f"{team.short_name}.svg"
+    file = os.path.join(direc,file_name)
+
+    if not os.path.exists(file):
+        team_link = get_team_svg(f"{team.name} FC")
+        response = requests.get(team_link).content #type: ignore
+        with open(file,'wb') as f:
+            f.write(response)
+
+    return file
+
+def gen_team_outline(team:model.Teams,league:str,refresh = False)-> str | None:
+    direc = os.path.join("assets",league,"outline")
+    os.makedirs(direc,exist_ok=True)
+    file_name = f"{team.short_name}.svg"
+    file = os.path.join(direc,file_name)
+    
+    if not os.path.exists(file) or refresh:
+        logo_url = load_svg(team=team,league=league)
+        with open(team.logo_url,'r') as f:
+            svg = f.read()
+        
+        outline = svg_tools.extract_outline_svg(svg)
+
+        with open(file,'w') as f:
+            f.write(outline)
+    return file
+
+def map_teams_srcs(teams:List[model.Teams],league:str)->List[model.Teams]: # type: ignore
+    for team in teams:
+        file_path = load_svg(team,league=league)
+        team.logo_url = file_path if file_path else ""
+    return teams
+
+def map_team_outlines(teams:List[model.Teams],league:str,refresh:bool=False)->List[model.Teams]:
+    for team in teams:
+        file_path = gen_team_outline(team=team,league=league,refresh=refresh)
+
+        team.logo_url = file_path if file_path else ""
+    return teams
+
+
 
 
 if __name__=="__main__":
 
-    team_svg = get_team_svg("chelsea")
-    print(f"svg site: {team_svg}")
 
-    response_svg = load_svg(team_svg) #type: ignore
 
-    with open("assets/original.svg",'w') as f:
-        f.write(response_svg) #type: ignore
-    
-    outlines = svg_tools.extract_outline_svg(response_svg) #type: ignore
-    print(outlines)
-    with open("assets/outlines.svg",'w') as f:
-        f.write(outlines)
-    
+    import api 
+
+    id = 47
+    league_data = api.get_league_info(id = id )
+    teams = api.get_teams_for_league(id = id)
+    teams = map_teams_srcs(teams,league_data.name)
+    teams_outline = map_team_outlines(teams,league_data.name) # type: ignore
+
+
+
+
+
 
 

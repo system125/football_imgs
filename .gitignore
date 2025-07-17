@@ -2,3 +2,7 @@ prototype.ipynb
 __pycache__/api.cpython-313.pyc
 .env
 __pycache__/api.cpython-312.pyc
+assets/*
+__pycache__/*
+__pycache__/model.cpython-312.pyc
+__pycache__/svg_tools.cpython-312.pyc

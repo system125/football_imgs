@@ -18,7 +18,7 @@ Auth_headers = {
 }
 
 @cache_by_id(model.LeagueInfo)
-def get_league_info(id:int):
+def get_league_info(id:int)->model.LeagueInfo:
     """
     Loads league roster from api 
     and returns the roster
@@ -26,30 +26,30 @@ def get_league_info(id:int):
     print("Made a request!")
 
     querystring={"leagueid":f"{id}"}
-    if API_URL:
-        response = requests.get(
-                        f"{API_URL}/football-get-league-detail",
-                        headers=Auth_headers,
-                        params=querystring
-                        )
-        logo_response = requests.get(
-            f"{API_URL}/football-get-league-logo",
-            headers=Auth_headers,
-            params=querystring
-        )
-        if response.status_code != 200 or logo_response.status_code != 200:
-            raise Exception("Error!! Loading league data!")
-        league_data = response.json()["response"]["leagues"]
+    response = requests.get(
+                    f"{API_URL}/football-get-league-detail",
+                    headers=Auth_headers,
+                    params=querystring
+                    )
+    
+    logo_response = requests.get(
+        f"{API_URL}/football-get-league-logo",
+        headers=Auth_headers,
+        params=querystring
+    )
+    if response.status_code != 200 or logo_response.status_code != 200:
+        raise Exception("Error!! Loading league data!")
+    league_data = response.json()["response"]["leagues"]
 
-        name = league_data["name"]
-        country = league_data["country"]
-        logo = logo_response.json()['response']['url']
+    name = league_data["name"]
+    country = league_data["country"]
+    logo = logo_response.json()['response']['url']
 
-        return  model.LeagueInfo(
-            name=name,
-            country=country,
-            logo_url=logo
-        )
+    return  model.LeagueInfo(
+        name=name,
+        country=country,
+        logo_url=logo
+    )
         
 @cache_by_id(model.Teams)      
 def get_teams_for_league(id:int):
